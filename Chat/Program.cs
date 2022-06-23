@@ -91,6 +91,5 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints => 
 {
     endpoints.MapHub<ChatHub>("api/chat");
-    endpoints.MapHub<ConnectionHub>("api/connection");
 });
 app.Run();
