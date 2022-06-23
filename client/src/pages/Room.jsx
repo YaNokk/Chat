@@ -11,7 +11,6 @@ import {
   notification,
   Popover,
   Row,
-  Spin,
   Typography,
 } from "antd";
 import { Upload } from "../components/Upload";
@@ -262,41 +261,38 @@ const CommentList = forwardRef(
           }
         }}
       >
-        {comments.length <= 0 ? (
-          <Spin spinning={true} />
-        ) : (
-          <List
-            dataSource={comments}
-            itemLayout="horizontal"
-            renderItem={({ content, timestamp, user, datetime, file }) => {
-              return true ? (
-                <Comment
-                  content={
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      {content}
-                      {map(file, (_file) => (
-                        <a
-                          key={_file.id}
-                          target={"_blank"}
-                          href={`${process.env.REACT_APP_API}file/download?filePath=${_file.filePath}`}
-                        >
-                          {_file.fileName}
-                        </a>
-                      ))}
-                    </div>
-                  }
-                  avatar={user.avatar}
-                  datetime={moment(timestamp).format(dateFormat)}
-                  author={user.userName}
-                />
-              ) : (
-                <div className={"chat_list_date"}>
-                  {datetime.format("D MMMM")}
-                </div>
-              );
-            }}
-            loading={comments.length <= 0}
-          />
+        <List
+          dataSource={comments}
+          itemLayout="horizontal"
+          renderItem={({ content, timestamp, user, datetime, file }) => {
+            return true ? (
+              <Comment
+                content={
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    {content}
+                    {map(file, (_file) => (
+                      <a
+                        key={_file.id}
+                        target={"_blank"}
+                        href={`${process.env.REACT_APP_API}file/download?filePath=${_file.filePath}`}
+                      >
+                        {_file.fileName}
+                      </a>
+                    ))}
+                  </div>
+                }
+                avatar={user.avatar}
+                datetime={moment(timestamp).format(dateFormat)}
+                author={user.userName}
+              />
+            ) : (
+              <div className={"chat_list_date"}>
+                {datetime.format("D MMMM")}
+              </div>
+            );
+          }}
+          loading={comments.length <= 0}
+        />
         )}
         <div ref={innerRef} className={"chat_scroll"} />
       </div>

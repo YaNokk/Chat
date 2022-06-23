@@ -7,6 +7,7 @@ import {
 } from "../api/Auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { response_success } from "../constants";
+import { notification } from "antd";
 
 export const AuthContext = createContext();
 
@@ -25,7 +26,10 @@ export const AuthProvider = ({ children }) => {
       setIsAuth(true);
       navigate(location.state?.from?.pathname || "/", { replace: true });
     } catch (e) {
-      console.log(e);
+      notification.error({
+        message: "Ошибка",
+        description: e.message,
+      });
     }
   };
 
@@ -36,7 +40,10 @@ export const AuthProvider = ({ children }) => {
         setIsAuth(true);
       }
     } catch (e) {
-      console.log(e);
+      notification.error({
+        message: "Ошибка",
+        description: e.message,
+      });
     }
   }
 
@@ -50,7 +57,10 @@ export const AuthProvider = ({ children }) => {
       }
       setLoading(false);
     } catch (e) {
-      console.log(e);
+      notification.error({
+        message: "Ошибка",
+        description: e.message,
+      });
     }
   };
   const logout = () => {

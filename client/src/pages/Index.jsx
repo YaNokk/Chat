@@ -1,22 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../routing/AuthProvider";
 import { request } from "../api";
-import {
-  Button,
-  Form,
-  Input,
-  Layout,
-  Modal,
-  notification,
-  Select,
-  Typography,
-} from "antd";
+import { Button, Form, Input, Layout, Modal, Select, Typography } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Content } from "antd/es/layout/layout";
 import { UserList } from "../components/UserList";
 import { RoomList } from "../components/RoomList";
 import { useNavigate } from "react-router-dom";
-import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 
 export const Index = () => {
   const navigate = useNavigate();
@@ -24,7 +14,6 @@ export const Index = () => {
   const [roomMembers, setRoomMembers] = useState([]);
   const [createRoom, setCreateRoom] = useState(false);
   const [rooms, setRooms] = useState([]);
-  const [connection, setConnection] = useState();
 
   const onSetRoomMembers = (id) => {
     if (roomMembers.includes(id)) {
@@ -35,46 +24,7 @@ export const Index = () => {
   useEffect(() => {
     getUsers();
     getRooms();
-    connect();
-    window.onbeforeunload = function () {
-      alert("эээээээ");
-      connection.invoke("Disconnect");
-      return "блаблабла";
-    };
   }, []);
-
-  const connect = async () => {
-    try {
-      console.log(localStorage.getItem("token"));
-      const connection = new HubConnectionBuilder()
-        .withUrl(`${process.env.REACT_APP_API}connection`, {
-          accessTokenFactory: () => localStorage.getItem("token"),
-        })
-        .configureLogging(LogLevel.Information)
-        .build();
-
-      connection.on("UserConnected", (user) => {
-        console.log(user);
-      });
-
-      connection.on("UserDisconnected", (user) => {
-        console.log(user);
-      });
-
-      connection.on("onError", (error) => {
-        notification.error({
-          message: "Ошибка",
-          description: error.msg,
-        });
-      });
-
-      await connection.start();
-      setConnection(connection);
-      connection.invoke("Connect");
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   const getUsers = async () => {
     const response = await request("get", "users/getUsers");

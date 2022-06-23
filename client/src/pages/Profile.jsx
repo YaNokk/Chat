@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { request } from "../api";
 import {
@@ -30,6 +30,7 @@ export const Profile = () => {
   const { id } = useParams();
   const [user, setUser] = useState(linkUser);
   const [type, setType] = useState("time");
+  const navigate = useNavigate();
   const [moment, setMoment] = useState();
 
   useEffect(() => {
@@ -57,6 +58,9 @@ export const Profile = () => {
 
   return (
     <Row gutter={[10, 10]}>
+      <Col span={24}>
+        <Button onClick={() => navigate("/")}>Назад</Button>
+      </Col>
       <Col span={24}>
         <Row>
           <Avatar size={64} src={user?.avatar} shape={"circle"} />
