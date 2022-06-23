@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --chatColor: black;
+  --chatFontSize: 14px;
+  --chatFont: "Roboto";
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.login-form {
+  width: 340px;
+}
+
+.login-wrapper {
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+  margin: auto;
+  height: 700px;
+  max-width: 800px;
+  border-radius: 16px;
+  background: #f6f6f6;
+
+  .ant-list {
+    padding: 0 60px 0 0;
+  }
+
+  .ant-comment-content, a {
+    color: var(--chatColor) !important;
+    font-size: var(--chatFontSize) !important;
+    font-family: var(--chatFont) !important;
+  }
+
+  .ant-comment-content-author {
+    &-name,
+    &-time {
+      font-weight: 600;
+    }
+  }
+
+  &_list_date {
+    background: deepskyblue;
+    color: black;
+    border-radius: 16px;
+    text-align: center;
+    width: 100px;
+    padding: 5px;
+    margin: auto;
+  }
+
+  &_list_wrapper {
+    overflow-y: auto;
+  }
+
+  .ant-form-item {
+    max-width: none;
+  }
+
+  &_input {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    position: relative;
+
+    .rotate {
+      transform: rotate(180deg);
+    }
+
+    &_icon {
+      .anticon {
+        padding: 6px;
+        border-radius: 100%;
+        border: 1px solid #dce1e6;
+        background: white;
+        box-shadow: 0 1px 3px #0000001f;
+
+        &:active,
+        &:hover {
+          background: #aeb7c21f;
+        }
+      }
+    }
+
+    &_icons {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      bottom: 80px;
+      right: 25px;
+      gap: 15px;
+    }
+  }
+}
+
+
